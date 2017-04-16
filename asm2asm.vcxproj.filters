@@ -64,5 +64,17 @@
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="prepro\Operator.h">
+      <Filter>Header Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="prepro\Value.h">
+      <Filter>Header Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="prepro\Expression.h">
+      <Filter>Header Files\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="prepro\Tokenizer.h">
+      <Filter>Header Files\Preprocessor</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
