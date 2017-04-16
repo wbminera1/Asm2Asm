@@ -83,7 +83,7 @@ namespace Preprocessor {
 				}
 			}
 			else {
-				if (m_DefineState.size() == 0 || m_DefineState.back()) {
+				if (GetDefineState()) {
 					dst = src;
 				}
 			}
@@ -169,7 +169,7 @@ namespace Preprocessor {
 		bool ProcessElse()
 		{
 			if (m_DefineState.size() > 0) {
-				m_DefineState[0] = !m_DefineState[0];
+				m_DefineState[m_DefineState.size() - 1] = !m_DefineState[m_DefineState.size() - 1];
 				return true;
 			}
 			return false;
@@ -180,6 +180,14 @@ namespace Preprocessor {
 			return false;
 		}
 
+		bool GetDefineState() const {
+			for (size_t i = m_DefineState.size(); i > 0; --i) {
+				if (!m_DefineState[i - 1]) {
+					return false;
+				}
+			}
+			return true;
+		}
 
 		std::vector<bool>  m_DefineState;
 		std::vector<Macro> m_Macro;

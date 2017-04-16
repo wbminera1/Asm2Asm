@@ -55,6 +55,7 @@ int main(int argc, char **argv)
 		switch (option)
 		{
 		case 'c':
+			processor.m_CommentOut = true;
 			break;
 		case 'D':
 			optionVal = optarg;
