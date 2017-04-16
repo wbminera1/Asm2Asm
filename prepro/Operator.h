@@ -1,5 +1,7 @@
 #pragma once
 
+namespace Preprocessor {
+
 	struct Operator
 	{
 		enum Type
@@ -109,7 +111,7 @@
 			return Descriptions[eNone];
 		}
 
-		Operator() 
+		Operator()
 			: m_Type(eNone)
 			, m_Arity(0)
 			, m_Precedence(0)
@@ -117,7 +119,7 @@
 
 		Operator(Type type)
 			: m_Type(type)
-		{ 
+		{
 			const Operator& op = Get(type);
 			m_Arity = op.m_Arity;
 			m_Precedence = op.m_Precedence;
@@ -163,7 +165,8 @@
 					result = EvaluateLogical(right);
 					right.Invalidate();
 				}
-			} else if (m_Arity == 2) {
+			}
+			else if (m_Arity == 2) {
 				if (m_Type >= eLogicalNOT && m_Type <= eLogicalOR) {
 					result = EvaluateLogical(left, right);
 					left.Invalidate();
@@ -204,4 +207,5 @@
 
 	};
 
+} // namespace Preprocessor
 

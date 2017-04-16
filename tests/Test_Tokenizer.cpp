@@ -9,7 +9,7 @@ TEST_CASE("PreprocessorTokenizer", "[Tokenizer]")
 		bool passed = true;
 		const char* sample1 = "#if (ASM) && (__x86_64__)";
 		std::string token;
-		Preprocessor prepro;
+		Preprocessor::Processor prepro;
 		sample1 = GetToken(sample1, token); passed &= (token == "#");
 		sample1 = GetToken(sample1, token); passed &= (token == "if");
 		sample1 = GetToken(sample1, token); passed &= (token == "(");

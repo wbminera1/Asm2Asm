@@ -21,7 +21,7 @@ public:
 class LineProcessor
 {
 public:
-	bool Process(FileReader& reader, FileWriter& writer, Preprocessor& preprocessor)
+	bool Process(FileReader& reader, FileWriter& writer, Preprocessor::Processor& preprocessor)
 	{
 		std::string line;
 		while (reader.ReadLine(line))
@@ -41,7 +41,7 @@ int main(int argc, char **argv)
 {
 	FileReader reader;
 	FileWriter writer;
-	Preprocessor preprocessor;
+	Preprocessor::Processor preprocessor;
 	std::string inputFile;
 
 	int option;

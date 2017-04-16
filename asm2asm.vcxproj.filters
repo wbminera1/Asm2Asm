@@ -76,5 +76,8 @@
     <ClInclude Include="prepro\Tokenizer.h">
       <Filter>Header Files\Preprocessor</Filter>
     </ClInclude>
+    <ClInclude Include="prepro\Macro.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

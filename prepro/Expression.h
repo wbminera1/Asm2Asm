@@ -1,6 +1,9 @@
 #pragma once
 #include "Value.h"
 #include "Operator.h"
+#include "Macro.h"
+
+namespace Preprocessor {
 
 	struct Expression
 	{
@@ -85,7 +88,7 @@
 			while (m_Expressions.size() > 1) {
 				int opIdx = GetOperatorIdxByPrecedence();
 				if (opIdx != -1) {
-					int atLeft,atRight;
+					int atLeft, atRight;
 					if (GetOperandsIdx(opIdx, atLeft, atRight)) {
 						Operator& op = m_Expressions[opIdx].m_Operator;
 						if (op.m_Arity == -1) {
@@ -93,12 +96,14 @@
 								return false;
 							}
 							atRight = atLeft;
-						} else if (op.m_Arity == 1) {
+						}
+						else if (op.m_Arity == 1) {
 							if (atRight == -1) {
 								return false;
 							}
 							atLeft = atRight;
-						} else if (op.m_Arity == 2) {
+						}
+						else if (op.m_Arity == 2) {
 							if (atLeft == -1 || atRight == -1) {
 								return false;
 							}
@@ -148,7 +153,7 @@
 					}
 					else {
 						Value value;
-						if(value.Parse(token.c_str())) {
+						if (value.Parse(token.c_str())) {
 							m_Expressions.push_back(value);
 						}
 						else {
@@ -166,4 +171,4 @@
 		}
 	};
 
-
+}  // namespace Preprocessor

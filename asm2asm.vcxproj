@@ -234,6 +234,7 @@
     <ClInclude Include="main\FileReader.h" />
     <ClInclude Include="main\targetver.h" />
     <ClInclude Include="prepro\Expression.h" />
+    <ClInclude Include="prepro\Macro.h" />
     <ClInclude Include="prepro\Operator.h" />
     <ClInclude Include="prepro\Preprocessor.h" />
     <ClInclude Include="prepro\Tokenizer.h" />

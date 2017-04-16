@@ -1,5 +1,6 @@
 #pragma once
 
+namespace Preprocessor {
 	struct Value
 	{
 		enum Type {
@@ -105,4 +106,4 @@
 		}
 	};
 
-
+}  // namespace Preprocessor

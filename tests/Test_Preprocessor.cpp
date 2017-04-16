@@ -7,7 +7,7 @@ TEST_CASE("PreprocessorTest", "[Preprocessor]")
 	SECTION("String 1")
 	{
 		bool passed = true;
-		Preprocessor prepro;
+		Preprocessor::Processor prepro;
 		std::string src1("#if (ASM) && (__x86_64__)");
 		std::string src2("hello");
 		std::string src3("#endif");
@@ -22,7 +22,7 @@ TEST_CASE("PreprocessorTest", "[Preprocessor]")
 	SECTION("String 2")
 	{
 		bool passed = true;
-		Preprocessor prepro;
+		Preprocessor::Processor prepro;
 		std::string src1("#if (ASM) && (__x86_64__)");
 		std::string src2("hello");
 		std::string src3("#endif");
