@@ -103,4 +103,31 @@ TEST_CASE("PreprocessorOperatorEvaluate", "[Operator]")
 		passed = (res.m_Type == res.eBoolean) && (res.m_BoolValue == false);
 		REQUIRE(passed);
 	}
+	SECTION("Evaluate Op == 1")
+	{
+		bool passed = false;
+		Preprocessor::Operator op(Preprocessor::Operator::eEqualTo);
+		std::vector<Preprocessor::Value> values;
+		Preprocessor::Value valueA(1);
+		Preprocessor::Value valueB(1);
+		values.push_back(valueA);
+		values.push_back(valueB);
+		Preprocessor::Value res = op.Evaluate(values);
+		passed = (res.m_Type == res.eBoolean) && (res.m_BoolValue == true);
+		REQUIRE(passed);
+	}
+
+	SECTION("Evaluate Op == 2")
+	{
+		bool passed = false;
+		Preprocessor::Operator op(Preprocessor::Operator::eEqualTo);
+		std::vector<Preprocessor::Value> values;
+		Preprocessor::Value valueA(1);
+		Preprocessor::Value valueB(0);
+		values.push_back(valueA);
+		values.push_back(valueB);
+		Preprocessor::Value res = op.Evaluate(values);
+		passed = (res.m_Type == res.eBoolean) && (res.m_BoolValue == false);
+		REQUIRE(passed);
+	}
 }

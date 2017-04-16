@@ -171,7 +171,12 @@ namespace Preprocessor {
 					result = EvaluateLogical(left, right);
 					left.Invalidate();
 					right.Invalidate();
+				} else if (m_Type >= eEqualTo && m_Type <= eLessThanOrEqualTo) {
+					result = EvaluateComparison(left, right);
+					left.Invalidate();
+					right.Invalidate();
 				}
+			
 			}
 			return result;
 		}
@@ -201,6 +206,30 @@ namespace Preprocessor {
 			}
 			else if (m_Type == eLogicalOR) {
 				dst.Set(valueA.m_BoolValue || valueB.m_BoolValue);
+			}
+			return dst;
+		}
+
+		Value EvaluateComparison(const Value& valueA, const Value& valueB) const
+		{
+			Value dst(false);
+			if (m_Type == eEqualTo) {
+				dst.Set(valueA.m_IntegerValue == valueB.m_IntegerValue);
+			}
+			else if (m_Type == eNotEqualTto) {
+				dst.Set(valueA.m_IntegerValue != valueB.m_IntegerValue);
+			}
+			else if (m_Type == eGreaterThan) {
+				dst.Set(valueA.m_IntegerValue > valueB.m_IntegerValue);
+			}
+			else if (m_Type == eLessThan) {
+				dst.Set(valueA.m_IntegerValue < valueB.m_IntegerValue);
+			}
+			else if (m_Type == eGreaterThanOrEqualTo) {
+				dst.Set(valueA.m_IntegerValue >= valueB.m_IntegerValue);
+			}
+			else if (m_Type == eLessThanOrEqualTo) {
+				dst.Set(valueA.m_IntegerValue <= valueB.m_IntegerValue);
 			}
 			return dst;
 		}

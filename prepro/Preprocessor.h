@@ -119,7 +119,7 @@ namespace Preprocessor {
 			case eElif:
 				return ProcessNotImplemented();
 			case eElse:
-				return ProcessNotImplemented();
+				return ProcessElse();
 			case eIfdef:
 				return ProcessNotImplemented();
 			case eIfndef:
@@ -161,6 +161,15 @@ namespace Preprocessor {
 		{
 			if (m_DefineState.size() > 0) {
 				m_DefineState.pop_back();
+				return true;
+			}
+			return false;
+		}
+
+		bool ProcessElse()
+		{
+			if (m_DefineState.size() > 0) {
+				m_DefineState[0] = !m_DefineState[0];
 				return true;
 			}
 			return false;
