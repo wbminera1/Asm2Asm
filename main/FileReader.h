@@ -1,35 +1,11 @@
 #pragma once
+#include "File.h"
 
-
-class FileReader
+class FileReader : public File
 {
 public:
-	FileReader() : m_FI(nullptr)
+	FileReader()
 	{
-	}
-
-	~FileReader()
-	{
-		Close();
-	}
-
-	bool Open(const char* fileName)
-	{
-		if (m_FI != nullptr)
-		{
-			Close();
-		}
-		m_FI = fopen(fileName, "rt");
-		return m_FI != nullptr;
-	}
-
-	void Close()
-	{
-		if (m_FI != nullptr)
-		{
-			fclose(m_FI);
-			m_FI = nullptr;
-		}
 	}
 
 	bool ReadLine(std::string& line)
@@ -66,9 +42,6 @@ public:
 		}
 		return line.length() > 0;
 	}
-
-private:
-	FILE* m_FI;
 
 };
 

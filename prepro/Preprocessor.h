@@ -83,7 +83,7 @@ namespace Preprocessor {
 				}
 			}
 			else {
-				if (m_DefineState.back()) {
+				if (m_DefineState.size() == 0 || m_DefineState.back()) {
 					dst = src;
 				}
 			}

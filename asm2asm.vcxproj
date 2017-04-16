@@ -231,7 +231,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="main\File.h" />
     <ClInclude Include="main\FileReader.h" />
+    <ClInclude Include="main\FileWriter.h" />
     <ClInclude Include="main\targetver.h" />
     <ClInclude Include="prepro\Expression.h" />
     <ClInclude Include="prepro\Macro.h" />
