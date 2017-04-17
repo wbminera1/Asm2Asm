@@ -7,17 +7,28 @@
 #include "FileReader.h"
 #include "FileWriter.h"
 
-
-
-
 class LineProcessor
 {
 public:
-	LineProcessor() : m_CommentOut(false) { }
+
+	enum Arch
+	{
+		eNone,
+		e32,
+		e64
+	};
+
+	LineProcessor() : m_CommentOut(false), m_Arch(eNone) { }
 
 	bool Process(FileReader& reader, FileWriter& writer, Preprocessor::Processor& preprocessor)
 	{
 		std::string line;
+		if (m_Arch == e32) {
+			writer.Write(std::string(".code32\n"));
+		}
+		else if (m_Arch == e64) {
+			writer.Write(std::string(".code64\n"));
+		}
 		while (reader.ReadLine(line))
 		{
 			std::string preprocessed;
@@ -36,7 +47,9 @@ public:
 		return true;
 	}
 
-	bool m_CommentOut;
+	bool		m_CommentOut;
+	Arch		m_Arch;
+	std::string m_SplitString;
 };
 
 int main(int argc, char **argv)
@@ -51,11 +64,34 @@ int main(int argc, char **argv)
 
 	int option;
 	std::string optionVal;
-	while ((option = getopt(argc, argv, "cD:O:")) != -1) {
+	while ((option = getopt(argc, argv, "?a:hcs:D:O:")) != -1) {
 		switch (option)
 		{
+		case 'a':
+			optionVal = optarg;
+			if (optionVal == "32") {
+				processor.m_Arch = LineProcessor::e32;
+			}
+			else if(optionVal == "64") {
+				processor.m_Arch = LineProcessor::e64;
+			}
+			else {
+				printf("-a incorrect\n");
+				return 1;
+			}
+			break;
 		case 'c':
 			processor.m_CommentOut = true;
+			break;
+		case 's':
+			optionVal = optarg;
+			if (optionVal.size() > 0) {
+				processor.m_SplitString = optionVal;
+			}
+			else {
+				printf("-s - argument expected\n");
+				return 1;
+			}
 			break;
 		case 'D':
 			optionVal = optarg;
@@ -63,6 +99,7 @@ int main(int argc, char **argv)
 				preprocessor.m_Macro.push_back(Preprocessor::Macro(optionVal.c_str(),1));
 			}
 			else {
+				printf("-D - argument expected\n");
 				return 1;
 			}
 			break;
@@ -72,10 +109,17 @@ int main(int argc, char **argv)
 				outputFile = optionVal;
 			}
 			else {
+				printf("-O - file name expected\n");
 				return 1;
 			}
 			break;
 		case '?':
+		case 'h':
+			printf("Asm2Asm\n");
+			printf("-a 32|64 architecture\n");
+			printf("-c comment strings\n");
+			printf("-D arg define symbol\n");
+			printf("-O arg output file\n");
 			return 1;
 		default:
 			;

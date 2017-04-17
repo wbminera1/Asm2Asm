@@ -15,19 +15,23 @@ public:
 
 	bool Open(const char* fileName, const char* mode)
 	{
-		if (m_FI != nullptr) {
+		if (IsValid()) {
 			Close();
 		}
 		m_FI = fopen(fileName, mode);
-		return m_FI != nullptr;
+		return IsValid();
 	}
 
 	void Close()
 	{
-		if (m_FI != nullptr) {
+		if (IsValid()) {
 			fclose(m_FI);
 			m_FI = nullptr;
 		}
+	}
+
+	bool IsValid() const {
+		return (m_FI != nullptr);
 	}
 
 protected:
