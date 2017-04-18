@@ -55,7 +55,7 @@ public:
 int main(int argc, char **argv)
 {
 	FileReader reader;
-	FileWriter writer;
+	FilePartsWriter writer;
 	Preprocessor::Processor preprocessor;
 	LineProcessor processor;
 
@@ -136,7 +136,7 @@ int main(int argc, char **argv)
 	if (inputFile.length() > 0 && reader.Open(inputFile.c_str(), "rt"))
 	{
 		if (outputFile.length() > 0) {
-			if (!writer.Open(outputFile.c_str(), "wt")) {
+			if (!writer.OpenParts(outputFile.c_str(), "wt", processor.m_SplitString.empty() ? -1 : 0)) {
 				return 1;
 			}
 		}

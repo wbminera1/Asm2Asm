@@ -18,6 +18,7 @@ public:
 		if (IsValid()) {
 			Close();
 		}
+		m_Name = fileName;
 		m_FI = fopen(fileName, mode);
 		return IsValid();
 	}
@@ -36,7 +37,7 @@ public:
 
 protected:
 	FILE* m_FI;
-
+	std::string m_Name;
 };
 
 
