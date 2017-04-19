@@ -28,7 +28,7 @@ class FilePartsWriter : public FileWriter
 		FilePartsWriter() : m_Idx(-1)
 		{ }
 
-		bool OpenParts(const char* fileName, const char* mode, int startIdx = -1, const char* suffix = "_%d")
+		bool OpenParts(const char* fileName, const char* mode, int startIdx = -1, const char* suffix = "_%03d.S")
 		{
 			m_OriginalName = fileName;
 			m_OriginalMode = mode;

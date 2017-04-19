@@ -20,15 +20,10 @@ public:
 
 	LineProcessor() : m_CommentOut(false), m_Arch(eNone) { }
 
-	bool Process(FileReader& reader, FileWriter& writer, Preprocessor::Processor& preprocessor)
+	bool Process(FileReader& reader, FilePartsWriter& writer, Preprocessor::Processor& preprocessor) const
 	{
+		WriteHeader(writer);
 		std::string line;
-		if (m_Arch == e32) {
-			writer.Write(std::string(".code32\n"));
-		}
-		else if (m_Arch == e64) {
-			writer.Write(std::string(".code64\n"));
-		}
 		while (reader.ReadLine(line))
 		{
 			std::string preprocessed;
@@ -43,8 +38,25 @@ public:
 					writer.Write(preprocessed);
 				}
 			}
+			std::string token;
+			GetToken(line.c_str(), token);
+			if (m_SplitString == token) {
+				writer.NewPart();
+				WriteHeader(writer);
+			}
 		}
 		return true;
+	}
+
+	bool WriteHeader(FilePartsWriter& writer) const
+	{
+		if (m_Arch == e32) {
+			return writer.Write(std::string(".code32\n"));
+		}
+		if (m_Arch == e64) {
+			return writer.Write(std::string(".code64\n"));
+		}
+		return false;
 	}
 
 	bool		m_CommentOut;
